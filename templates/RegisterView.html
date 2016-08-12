@@ -1,0 +1,41 @@
+<div class="screen LoginLayout" style="display: none;">
+	<div class="login_panel login">
+		<div class="login_panel_content" style="backface-visibility: inherit;">
+			<div class="header" data-bind="css: {'custom_logo': sCustomLogoUrl}">
+				<!-- ko if: sCustomLogoUrl === '' --><span class="icon"></span><!-- /ko -->
+				<!-- ko if: sCustomLogoUrl !== '' --><img data-bind="attr: {'src': sCustomLogoUrl}"/><!-- /ko -->
+				<span class="text" data-bind="i18n: {'key': 'COREWEBCLIENT/HEADING_LOGIN'}"></span>
+			</div>
+			
+			<div class="content login clearfix">
+				<form class="form fields" action="#" autocomplete="on" onsubmit="return false;" data-bind="command: registerCommand">
+					<div class="fieldset">
+						<div class="row login" data-bind="css: {'focused': loginFocus(), 'filled': login().length > 0, shake: shake()}">
+							<label for="selenium_login_login" class="placeholder"></label>
+							<span class="value">
+								<input id="selenium_login_login" tabindex="1" class="input" name="login" type="text" spellcheck="false"
+									   data-bind="value: login, hasfocus: loginFocus, valueUpdate: 'afterkeydown', i18n: {'key': '%MODULENAME%/LABEL_LOGIN', 'type': 'placeholder'}" />
+							</span>
+						</div>
+						<div class="row password" data-bind="css: {'focused': passwordFocus(), 'filled': password().length > 0, shake: shake()}">
+							<label for="selenium_login_password" class="placeholder"></label>
+							<span class="value">
+								<input id="selenium_login_password" tabindex="2" class="input" name="password" type="password" spellcheck="false"
+									   data-bind="value: password, hasfocus: passwordFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_PASSWORD', 'type': 'placeholder'}" />
+							</span>
+						</div>
+					</div>
+					<div class="row buttons">
+						<button type="submit" tabindex="3" class="button login" data-bind="text: registerButtonText, command: registerCommand"></button>
+					</div>
+					{%INCLUDE-START/Register-After/INCLUDE-END%}
+				</form>
+				<div class="clear"></div>
+			</div>
+			
+			<div class="description" data-bind="visible: sInfoText !== '', html: sInfoText"></div>
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="vhelper"></div>
+</div>
