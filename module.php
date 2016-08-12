@@ -3,6 +3,8 @@
 class StandardRegisterFormWebclientModule extends AApiModule
 {
 	protected $aSettingsMap = array(
+		'ServerModuleName' => array('StandardRegisterFormWebclient', 'string'),
+		'HashModuleName' => array('register', 'string'),
 		'CustomLogoUrl' => array('', 'string'),
 		'InfoText' => array('', 'string'),
 	);
@@ -25,6 +27,8 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	public function GetAppData()
 	{
 		return array(
+			'ServerModuleName' => $this->getConfig('ServerModuleName', ''),
+			'HashModuleName' => $this->getConfig('HashModuleName', ''),
 			'CustomLogoUrl' => $this->getConfig('CustomLogoUrl', ''),
 			'InfoText' => $this->getConfig('InfoText', ''),
 		);

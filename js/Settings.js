@@ -5,7 +5,7 @@ var
 ;
 
 module.exports = {
-	ServerModuleName: 'StandardRegisterFormWebclient',
+	ServerModuleName: '%ModuleName',
 	HashModuleName: 'register',
 	
 	CustomLogoUrl: '',
@@ -19,6 +19,9 @@ module.exports = {
 	init: function (oAppDataSection) {
 		if (oAppDataSection)
 		{
+			this.ServerModuleName = Types.pString(oAppDataSection.ServerModuleName);
+			this.HashModuleName = Types.pString(oAppDataSection.HashModuleName);
+			
 			this.CustomLogoUrl = Types.pString(oAppDataSection.CustomLogoUrl);
 			this.InfoText = Types.pString(oAppDataSection.InfoText);
 		}
