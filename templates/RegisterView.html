@@ -4,7 +4,7 @@
 			<div class="header" data-bind="css: {'custom_logo': sCustomLogoUrl}">
 				<!-- ko if: sCustomLogoUrl === '' --><span class="icon"></span><!-- /ko -->
 				<!-- ko if: sCustomLogoUrl !== '' --><img data-bind="attr: {'src': sCustomLogoUrl}"/><!-- /ko -->
-				<span class="text" data-bind="i18n: {'key': 'COREWEBCLIENT/HEADING_LOGIN'}"></span>
+				<span class="text" data-bind="i18n: {'key': 'COREWEBCLIENT/HEADING_REGISTER'}"></span>
 			</div>
 			
 			<div class="content login clearfix">
@@ -14,7 +14,7 @@
 							<label for="selenium_login_login" class="placeholder"></label>
 							<span class="value">
 								<input id="selenium_login_login" tabindex="1" class="input" name="login" type="text" spellcheck="false"
-									   data-bind="value: login, hasfocus: loginFocus, valueUpdate: 'afterkeydown', i18n: {'key': '%MODULENAME%/LABEL_LOGIN', 'type': 'placeholder'}" />
+									   data-bind="value: login, hasfocus: loginFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_LOGIN', 'type': 'placeholder'}" />
 							</span>
 						</div>
 						<div class="row password" data-bind="css: {'focused': passwordFocus(), 'filled': password().length > 0, shake: shake()}">

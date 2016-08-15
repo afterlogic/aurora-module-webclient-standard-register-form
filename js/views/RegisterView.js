@@ -12,6 +12,7 @@ var
 	Api = require('%PathToCoreWebclientModule%/js/Api.js'),
 	App = require('%PathToCoreWebclientModule%/js/App.js'),
 	Browser = require('%PathToCoreWebclientModule%/js/Browser.js'),
+	Storage = require('%PathToCoreWebclientModule%/js/Storage.js'),
 	
 	CAbstractScreenView = require('%PathToCoreWebclientModule%/js/views/CAbstractScreenView.js'),
 	
@@ -26,7 +27,7 @@ var
  */
 function CRegisterView()
 {
-	CAbstractScreenView.call(this);
+	CAbstractScreenView.call(this, '%ModuleName%');
 	
 	this.sCustomLogoUrl = Settings.CustomLogoUrl;
 	this.sInfoText = Settings.InfoText;
@@ -118,7 +119,7 @@ CRegisterView.prototype.onRegisterResponse = function (oResponse, oRequest)
 	}
 	else
 	{
-		
+		Storage.setData('MessageOnAppRun', TextUtils.i18n('COREWEBCLIENT/REPORT_YOU_REGISTERED_AND_CAN_LOGIN'));
 		if (window.location.search !== '' &&
 			UrlUtils.getRequestParam('reset-pass') === null &&
 			UrlUtils.getRequestParam('invite-auth') === null &&

@@ -16,7 +16,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 */
 	public function init()
 	{
-		$this->setNonAuthorizedMethods(array('Register'));
+		$this->setNonAuthorizedMethods(array('GetAppData', 'Register'));
 	}
 	
 	/**
@@ -44,17 +44,18 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 * 
 	 * @throws \System\Exceptions\ClientException
 	 */
-	public function Register($Login, $Password)
+	public function Register($Login, $Password, $UserId)
 	{
 		$mResult = false;
 
-//		$this->broadcastEvent('Register', array(
-//			array (
-//				'Login' => $Login,
-//				'Password' => $Password,
-//			),
-//			&$mResult
-//		));
+		$this->broadcastEvent('Register', array(
+			array (
+				'Login' => $Login,
+				'Password' => $Password,
+				'UserId' => $UserId,
+			),
+			&$mResult
+		));
 
 		return $mResult;
 	}
