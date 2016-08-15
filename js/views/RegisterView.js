@@ -102,7 +102,7 @@ CRegisterView.prototype.register = function ()
 
 /**
  * Receives data from the server. Shows error and shakes form if server has returned false-result.
- * Otherwise clears search-string if it don't contain "reset-pass", "invite-auth" and "external-services" parameters and reloads page.
+ * Otherwise clears search-string if it don't contain "reset-pass", "invite-auth" and "oauth" parameters and reloads page.
  * 
  * @param {Object} oResponse Data obtained from the server.
  * @param {Object} oRequest Data has been transferred to the server.
@@ -122,7 +122,7 @@ CRegisterView.prototype.onRegisterResponse = function (oResponse, oRequest)
 		if (window.location.search !== '' &&
 			UrlUtils.getRequestParam('reset-pass') === null &&
 			UrlUtils.getRequestParam('invite-auth') === null &&
-			UrlUtils.getRequestParam('external-services') === null)
+			UrlUtils.getRequestParam('oauth') === null)
 		{
 			UrlUtils.clearAndReloadLocation(Browser.ie8AndBelow, true);
 		}
