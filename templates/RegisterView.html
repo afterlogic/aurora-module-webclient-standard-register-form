@@ -9,19 +9,40 @@
 			
 			<div class="content login clearfix">
 				<form class="form fields" action="#" autocomplete="on" onsubmit="return false;" data-bind="command: registerCommand">
+					
+					<!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+					<div style="width: 0px; height: 0px; overflow: hidden;">
+						<input type="text" name="fakeusernameremembered"/>
+						<input type="password" name="fakepasswordremembered"/>
+					</div>
+					
 					<div class="fieldset">
-						<div class="row login" data-bind="css: {'focused': loginFocus(), 'filled': login().length > 0, shake: shake()}">
-							<label for="selenium_login_login" class="placeholder"></label>
+						<div class="row login" data-bind="css: {'focused': nameFocus(), 'filled': name().length > 0, shake: shake()}">
+							<label for="selenium_register_name" class="placeholder"></label>
 							<span class="value">
-								<input id="selenium_login_login" tabindex="1" class="input" name="login" type="text" spellcheck="false"
+								<input id="selenium_register_name" tabindex="1" class="input" name="name" type="text" spellcheck="false"
+									   data-bind="value: name, hasfocus: nameFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_NAME', 'type': 'placeholder'}" />
+							</span>
+						</div>
+						<div class="row login" data-bind="css: {'focused': loginFocus(), 'filled': login().length > 0, shake: shake()}">
+							<label for="selenium_register_login" class="placeholder"></label>
+							<span class="value">
+								<input id="selenium_register_login" tabindex="1" class="input" name="login" type="text" spellcheck="false"
 									   data-bind="value: login, hasfocus: loginFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_LOGIN', 'type': 'placeholder'}" />
 							</span>
 						</div>
 						<div class="row password" data-bind="css: {'focused': passwordFocus(), 'filled': password().length > 0, shake: shake()}">
-							<label for="selenium_login_password" class="placeholder"></label>
+							<label for="selenium_register_password" class="placeholder"></label>
 							<span class="value">
-								<input id="selenium_login_password" tabindex="2" class="input" name="password" type="password" spellcheck="false"
+								<input id="selenium_register_password" tabindex="2" class="input" name="password" type="password" spellcheck="false"
 									   data-bind="value: password, hasfocus: passwordFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_PASSWORD', 'type': 'placeholder'}" />
+							</span>
+						</div>
+						<div class="row password" data-bind="css: {'focused': confirmPasswordFocus(), 'filled': confirmPassword().length > 0, shake: shake()}">
+							<label for="selenium_register_confirm_password" class="placeholder"></label>
+							<span class="value">
+								<input id="selenium_register_confirm_password" tabindex="2" class="input" name="confirmPassword" type="password" spellcheck="false"
+									   data-bind="value: confirmPassword, hasfocus: confirmPasswordFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_CONFIRM_PASSWORD', 'type': 'placeholder'}" />
 							</span>
 						</div>
 					</div>

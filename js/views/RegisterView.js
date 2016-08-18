@@ -13,6 +13,7 @@ var
 	App = require('%PathToCoreWebclientModule%/js/App.js'),
 	Browser = require('%PathToCoreWebclientModule%/js/Browser.js'),
 	Storage = require('%PathToCoreWebclientModule%/js/Storage.js'),
+	Screens = require('%PathToCoreWebclientModule%/js/Screens.js'),
 	
 	CAbstractScreenView = require('%PathToCoreWebclientModule%/js/views/CAbstractScreenView.js'),
 	
@@ -32,11 +33,15 @@ function CRegisterView()
 	this.sCustomLogoUrl = Settings.CustomLogoUrl;
 	this.sInfoText = Settings.InfoText;
 	
+	this.name = ko.observable('');
 	this.login = ko.observable('');
 	this.password = ko.observable('');
+	this.confirmPassword = ko.observable('');
 	
+	this.nameFocus = ko.observable(false);
 	this.loginFocus = ko.observable(false);
 	this.passwordFocus = ko.observable(false);
+	this.confirmPasswordFocus = ko.observable(false);
 
 	this.loading = ko.observable(false);
 
@@ -79,25 +84,58 @@ CRegisterView.prototype.onShow = function ()
 };
 
 /**
+ * 
+ * @param {string} sLogin
+ * @param {string} sPassword
+ * @param {string} sConfirmPassword
+ * @returns {Boolean}
+ */
+CRegisterView.prototype.validateForm = function (sLogin, sPassword, sConfirmPassword)
+{
+	if (sLogin === '')
+	{
+		this.loginFocus(true);
+		this.shake(true);
+		return false;
+	}
+	if (sPassword === '')
+	{
+		this.passwordFocus(true);
+		this.shake(true);
+		return false;
+	}
+	if (sPassword !== '' && sPassword !== sConfirmPassword)
+	{
+		this.confirmPasswordFocus(true);
+		this.shake(true);
+		Screens.showError(TextUtils.i18n('COREWEBCLIENT/ERROR_PASSWORDS_DO_NOT_MATCH'));
+		return false;
+	}
+	return true;
+};
+
+/**
  * Checks login input value and sends register request to server.
  */
 CRegisterView.prototype.register = function ()
 {
-	if (!this.loading() && ('' !== $.trim(this.login())))
+	if (!this.loading())
 	{
-		var oParameters = {
-			'Login': this.login(),
-			'Password': this.password()
-		};
-
-		this.loading(true);
-
-		Ajax.send('%ModuleName%', 'Register', oParameters, this.onRegisterResponse, this);
-	}
-	else
-	{
-		this.loginFocus(true);
-		this.shake(true);
+		var
+			sLogin = $.trim(this.login()),
+			sPassword = $.trim(this.password()),
+			sConfirmPassword = $.trim(this.confirmPassword()),
+			oParameters = {
+				'Name': $.trim(this.name()),
+				'Login': sLogin,
+				'Password': sPassword
+			}
+		;
+		if (this.validateForm(sLogin, sPassword, sConfirmPassword))
+		{
+			this.loading(true);
+			Ajax.send('%ModuleName%', 'Register', oParameters, this.onRegisterResponse, this);
+		}
 	}
 };
 
@@ -115,11 +153,12 @@ CRegisterView.prototype.onRegisterResponse = function (oResponse, oRequest)
 		this.loading(false);
 		this.shake(true);
 		
-		Api.showErrorByCode(oResponse, TextUtils.i18n('COREWEBCLIENT/ERROR_PASS_INCORRECT'));
+		Api.showErrorByCode(oResponse, TextUtils.i18n('COREWEBCLIENT/ERROR_REGISTRATION_FAILED'));
 	}
 	else
 	{
-		Storage.setData('MessageOnAppRun', TextUtils.i18n('COREWEBCLIENT/REPORT_YOU_REGISTERED_AND_CAN_LOGIN'));
+		$.cookie('AuthToken', oResponse.Result.AuthToken, { expires: 30 });
+		
 		if (window.location.search !== '' &&
 			UrlUtils.getRequestParam('reset-pass') === null &&
 			UrlUtils.getRequestParam('invite-auth') === null &&

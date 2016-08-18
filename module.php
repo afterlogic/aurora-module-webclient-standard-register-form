@@ -37,14 +37,16 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	/**
 	 * Broadcasts Register event to other modules to log in the system with specified parameters.
 	 * 
+	 * @param string $Name New name for user.
 	 * @param string $Login Login for authentication.
 	 * @param string $Password Password for authentication.
+	 * @param int $UserId Identificator of user which will contain new account.
 	 * 
 	 * @return array
 	 * 
 	 * @throws \System\Exceptions\ClientException
 	 */
-	public function Register($Login, $Password, $UserId)
+	public function Register($Name, $Login, $Password, $UserId)
 	{
 		$mResult = false;
 
@@ -56,6 +58,19 @@ class StandardRegisterFormWebclientModule extends AApiModule
 			),
 			&$mResult
 		));
+		
+		if (!empty($mResult))
+		{
+			$oLoginDecorator = \CApi::GetModuleDecorator('StandardLoginFormWebclient');
+			$mResult = $oLoginDecorator->Login($Login, $Password);
+			\CApi::getAuthenticatedUserId($mResult['AuthToken']);
+		}
+		
+		if (!empty($Name) && !empty($mResult) && !empty($UserId))
+		{
+			$oCoreDecorator = \CApi::GetModuleDecorator('Core');
+			$oCoreDecorator->UpdateUser($UserId, $Name);
+		}
 
 		return $mResult;
 	}
