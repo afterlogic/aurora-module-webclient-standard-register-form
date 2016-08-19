@@ -59,6 +59,7 @@ function CRegisterView()
 	this.welcomeText = ko.observable('');
 	App.subscribeEvent('ShowWelcomeRegisterText', _.bind(function (oParams) {
 		this.welcomeText(oParams.WelcomeText);
+		this.name(oParams.UserName);
 	}, this));
 	
 	App.broadcastEvent('%ModuleName%::ConstructView::after', {'Name': this.ViewConstructorName, 'View': this});
