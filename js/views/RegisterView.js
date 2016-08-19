@@ -12,7 +12,6 @@ var
 	Api = require('%PathToCoreWebclientModule%/js/Api.js'),
 	App = require('%PathToCoreWebclientModule%/js/App.js'),
 	Browser = require('%PathToCoreWebclientModule%/js/Browser.js'),
-	Storage = require('%PathToCoreWebclientModule%/js/Storage.js'),
 	Screens = require('%PathToCoreWebclientModule%/js/Screens.js'),
 	
 	CAbstractScreenView = require('%PathToCoreWebclientModule%/js/views/CAbstractScreenView.js'),
@@ -56,6 +55,11 @@ function CRegisterView()
 	this.registerCommand = Utils.createCommand(this, this.register, this.canTryRegister);
 
 	this.shake = ko.observable(false).extend({'autoResetToFalse': 800});
+	
+	this.welcomeText = ko.observable('');
+	App.subscribeEvent('ShowWelcomeRegisterText', _.bind(function (oParams) {
+		this.welcomeText(oParams.WelcomeText);
+	}, this));
 	
 	App.broadcastEvent('%ModuleName%::ConstructView::after', {'Name': this.ViewConstructorName, 'View': this});
 }
