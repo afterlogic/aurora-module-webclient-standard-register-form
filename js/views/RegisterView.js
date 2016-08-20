@@ -60,6 +60,10 @@ function CRegisterView()
 	App.subscribeEvent('ShowWelcomeRegisterText', _.bind(function (oParams) {
 		this.welcomeText(oParams.WelcomeText);
 		this.name(oParams.UserName);
+		if (this.name() !== '')
+		{
+			this.nameFocus(true);
+		}
 	}, this));
 	
 	App.broadcastEvent('%ModuleName%::ConstructView::after', {'Name': this.ViewConstructorName, 'View': this});

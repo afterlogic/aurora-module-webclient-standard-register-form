@@ -23,7 +23,7 @@
 							<label for="selenium_register_name" class="placeholder"></label>
 							<span class="value">
 								<input id="selenium_register_name" tabindex="1" class="input" name="name" type="text" spellcheck="false"
-									   data-bind="value: name, hasfocus: nameFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_NAME', 'type': 'placeholder'}" />
+									   data-bind="value: name, hasfocus: nameFocus, onFocusSelect: true, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_NAME', 'type': 'placeholder'}" />
 							</span>
 						</div>
 						<div class="row login" data-bind="css: {'focused': loginFocus(), 'filled': login().length > 0, shake: shake()}">

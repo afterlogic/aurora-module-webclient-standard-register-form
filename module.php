@@ -48,6 +48,11 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 */
 	public function Register($Name, $Login, $Password, $UserId)
 	{
+		if (empty($UserId))
+		{
+			throw new \System\Exceptions\AuroraApiException(\System\Notifications::AccessDenied);
+		}
+		
 		$mResult = false;
 
 		$this->broadcastEvent('Register', array(
