@@ -44,7 +44,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 * 
 	 * @return array
 	 * 
-	 * @throws \System\Exceptions\ClientException
+	 * @throws \System\Exceptions\AuroraApiException
 	 */
 	public function Register($Name, $Login, $Password, $UserId)
 	{
