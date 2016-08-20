@@ -5,7 +5,7 @@ var
 ;
 
 module.exports = {
-	ServerModuleName: '%ModuleName',
+	ServerModuleName: '%ModuleName%',
 	HashModuleName: 'register',
 	
 	CustomLogoUrl: '',
