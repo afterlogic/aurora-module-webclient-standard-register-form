@@ -26,6 +26,8 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 */
 	public function GetAppData()
 	{
+		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		
 		return array(
 			'ServerModuleName' => $this->getConfig('ServerModuleName', ''),
 			'HashModuleName' => $this->getConfig('HashModuleName', ''),
@@ -48,9 +50,11 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 */
 	public function Register($Name, $Login, $Password, $UserId)
 	{
+		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		
 		if (empty($UserId))
 		{
-			throw new \System\Exceptions\AuroraApiException(\System\Notifications::AccessDenied);
+			throw new \System\Exceptions\AuroraApiException(\System\Notifications::InvalidInputParameter);
 		}
 		
 		$mResult = false;
