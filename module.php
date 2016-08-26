@@ -16,7 +16,6 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 */
 	public function init()
 	{
-		$this->setNonAuthorizedMethods(array('GetAppData', 'Register'));
 	}
 	
 	/**
