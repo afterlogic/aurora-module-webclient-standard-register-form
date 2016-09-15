@@ -19,7 +19,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	}
 	
 	/**
-	 * Obtains settings of the Standard Login Form Module.
+	 * Obtaines list of module settings for authenticated user.
 	 * 
 	 * @return array
 	 */
