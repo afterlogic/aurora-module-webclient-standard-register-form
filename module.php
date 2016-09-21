@@ -1,4 +1,20 @@
 <?php
+/*
+ * @copyright Copyright (c) 2016, Afterlogic Corp.
+ * @license AGPL-3.0
+ *
+ * This code is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License, version 3,
+ * as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License, version 3,
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ */
 
 class StandardRegisterFormWebclientModule extends AApiModule
 {
@@ -8,16 +24,8 @@ class StandardRegisterFormWebclientModule extends AApiModule
 		'CustomLogoUrl' => array('', 'string'),
 		'InfoText' => array('', 'string'),
 	);
-
-	/**
-	 * Initializes Standard Login Form Module.
-	 * 
-	 * @return array
-	 */
-	public function init()
-	{
-	}
 	
+	/***** public functions might be called with web API *****/
 	/**
 	 * Obtaines list of module settings for authenticated user.
 	 * 
@@ -42,9 +50,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 * @param string $Login Login for authentication.
 	 * @param string $Password Password for authentication.
 	 * @param int $UserId Identificator of user which will contain new account.
-	 * 
 	 * @return array
-	 * 
 	 * @throws \System\Exceptions\AuroraApiException
 	 */
 	public function Register($Name, $Login, $Password, $UserId)
@@ -57,7 +63,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 		}
 		
 		$mResult = false;
-
+		
 		$this->broadcastEvent('Register', array(
 			array (
 				'Login' => $Login,
@@ -79,7 +85,8 @@ class StandardRegisterFormWebclientModule extends AApiModule
 			$oCoreDecorator = \CApi::GetModuleDecorator('Core');
 			$oCoreDecorator->UpdateUser($UserId, $Name);
 		}
-
+		
 		return $mResult;
 	}
+	/***** public functions might be called with web API *****/
 }
