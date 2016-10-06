@@ -32,12 +32,11 @@ function CRegisterView()
 	this.sCustomLogoUrl = Settings.CustomLogoUrl;
 	this.sInfoText = Settings.InfoText;
 	
-	this.name = ko.observable('');
 	this.login = ko.observable('');
+	this.enableLoginEdit = ko.observable(true);
 	this.password = ko.observable('');
 	this.confirmPassword = ko.observable('');
 	
-	this.nameFocus = ko.observable(false);
 	this.loginFocus = ko.observable(false);
 	this.passwordFocus = ko.observable(false);
 	this.confirmPasswordFocus = ko.observable(false);
@@ -59,11 +58,8 @@ function CRegisterView()
 	this.welcomeText = ko.observable('');
 	App.subscribeEvent('ShowWelcomeRegisterText', _.bind(function (oParams) {
 		this.welcomeText(oParams.WelcomeText);
-		this.name(oParams.UserName);
-		if (this.name() !== '')
-		{
-			this.nameFocus(true);
-		}
+		this.login(oParams.UserName);
+		this.enableLoginEdit(false);
 	}, this));
 	
 	App.broadcastEvent('%ModuleName%::ConstructView::after', {'Name': this.ViewConstructorName, 'View': this});
@@ -135,7 +131,6 @@ CRegisterView.prototype.register = function ()
 			sPassword = $.trim(this.password()),
 			sConfirmPassword = $.trim(this.confirmPassword()),
 			oParameters = {
-				'Name': $.trim(this.name()),
 				'Login': sLogin,
 				'Password': sPassword
 			}
