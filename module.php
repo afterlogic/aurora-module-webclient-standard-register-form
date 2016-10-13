@@ -66,14 +66,15 @@ class StandardRegisterFormWebclientModule extends AApiModule
 		
 		$mResult = false;
 		
-		$this->broadcastEvent('Register', array(
+		$this->broadcastEvent(
+			'Register', 
 			array (
 				'Login' => $Login,
 				'Password' => $Password,
 				'UserId' => $UserId,
 			),
-			&$mResult
-		));
+			$mResult
+		);
 		
 		if (!empty($mResult))
 		{
