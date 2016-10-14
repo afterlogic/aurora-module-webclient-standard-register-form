@@ -55,7 +55,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 * @return array
 	 * @throws \System\Exceptions\AuroraApiException
 	 */
-	public function Register($Name, $Login, $Password, $UserId)
+	public function Register($Login, $Password, $UserId)
 	{
 		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
 		
@@ -66,13 +66,14 @@ class StandardRegisterFormWebclientModule extends AApiModule
 		
 		$mResult = false;
 		
+		$refArgs = array (
+			'Login' => $Login,
+			'Password' => $Password,
+			'UserId' => $UserId,
+		);
 		$this->broadcastEvent(
 			'Register', 
-			array (
-				'Login' => $Login,
-				'Password' => $Password,
-				'UserId' => $UserId,
-			),
+			$refArgs,
 			$mResult
 		);
 		
