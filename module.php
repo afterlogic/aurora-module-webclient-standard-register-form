@@ -29,7 +29,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	
 	/***** public functions might be called with web API *****/
 	/**
-	 * Obtaines list of module settings for authenticated user.
+	 * Obtains list of module settings for authenticated user.
 	 * 
 	 * @return array
 	 */
@@ -51,7 +51,7 @@ class StandardRegisterFormWebclientModule extends AApiModule
 	 * @param string $Name New name for user.
 	 * @param string $Login Login for authentication.
 	 * @param string $Password Password for authentication.
-	 * @param int $UserId Identificator of user which will contain new account.
+	 * @param int $UserId Identifier of user which will contain new account.
 	 * @return array
 	 * @throws \System\Exceptions\AuroraApiException
 	 */
