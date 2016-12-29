@@ -61,6 +61,15 @@ class StandardRegisterFormWebclientModule extends AApiModule
 		
 		if (empty($UserId))
 		{
+			\CApi::$__SKIP_CHECK_USER_ROLE__ = true;
+	
+			$UserId = \CApi::GetModuleDecorator('Core')->CreateUser(0, $Login);
+			
+			\CApi::$__SKIP_CHECK_USER_ROLE__ = false;
+		}
+
+		if (empty($UserId))
+		{
 			throw new \System\Exceptions\AuroraApiException(\System\Notifications::InvalidInputParameter);
 		}
 		
