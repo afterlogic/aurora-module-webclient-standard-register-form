@@ -20,13 +20,6 @@
 
 class StandardRegisterFormWebclientModule extends AApiModule
 {
-	protected $aSettingsMap = array(
-		'ServerModuleName' => array('StandardRegisterFormWebclient', 'string'),
-		'HashModuleName' => array('register', 'string'),
-		'CustomLogoUrl' => array('', 'string'),
-		'InfoText' => array('', 'string'),
-	);
-	
 	/***** public functions might be called with web API *****/
 	/**
 	 * Obtains list of module settings for authenticated user.

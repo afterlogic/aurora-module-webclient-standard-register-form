@@ -1,6 +1,18 @@
 {
-    "ServerModuleName": "StandardRegisterFormWebclient",
-    "HashModuleName": "register",
-    "CustomLogoUrl": "",
-    "InfoText": ""
+    "ServerModuleName": [
+		"StandardRegisterFormWebclient",
+		"string"
+	],
+    "HashModuleName": [
+		"register",
+		"string"
+	],
+    "CustomLogoUrl": [
+		"",
+		"string"
+	],
+    "InfoText": [
+		"",
+		"string"
+	]
 }
