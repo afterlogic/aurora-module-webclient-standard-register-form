@@ -18,7 +18,9 @@
  * @package Modules
  */
 
-class StandardRegisterFormWebclientModule extends AApiModule
+namespace Aurora\Modules;
+
+class StandardRegisterFormWebclientModule extends \AApiModule
 {
 	/***** public functions might be called with web API *****/
 	/**
