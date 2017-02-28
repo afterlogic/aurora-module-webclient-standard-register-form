@@ -20,7 +20,7 @@
 
 namespace Aurora\Modules;
 
-class StandardRegisterFormWebclientModule extends \AApiModule
+class StandardRegisterFormWebclientModule extends \Aurora\System\AbstractModule
 {
 	/***** public functions might be called with web API *****/
 	/**
@@ -30,7 +30,7 @@ class StandardRegisterFormWebclientModule extends \AApiModule
 	 */
 	public function GetSettings()
 	{
-		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
 		
 		return array(
 			'ServerModuleName' => $this->getConfig('ServerModuleName', ''),
@@ -52,15 +52,15 @@ class StandardRegisterFormWebclientModule extends \AApiModule
 	 */
 	public function Register($Login, $Password, $UserId)
 	{
-		\CApi::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
 		
 		if (empty($UserId))
 		{
-			\CApi::$__SKIP_CHECK_USER_ROLE__ = true;
+			\Aurora\System\Api::$__SKIP_CHECK_USER_ROLE__ = true;
 	
-			$UserId = \CApi::GetModuleDecorator('Core')->CreateUser(0, $Login);
+			$UserId = \Aurora\System\Api::GetModuleDecorator('Core')->CreateUser(0, $Login);
 			
-			\CApi::$__SKIP_CHECK_USER_ROLE__ = false;
+			\Aurora\System\Api::$__SKIP_CHECK_USER_ROLE__ = false;
 		}
 
 		if (empty($UserId))
@@ -83,14 +83,14 @@ class StandardRegisterFormWebclientModule extends \AApiModule
 		
 		if (!empty($mResult))
 		{
-			$oLoginDecorator = \CApi::GetModuleDecorator('StandardLoginFormWebclient');
+			$oLoginDecorator = \Aurora\System\Api::GetModuleDecorator('StandardLoginFormWebclient');
 			$mResult = $oLoginDecorator->Login($Login, $Password);
-			\CApi::getAuthenticatedUserId($mResult['AuthToken']);
+			\Aurora\System\Api::getAuthenticatedUserId($mResult['AuthToken']);
 		}
 		
 		if (!empty($Name) && !empty($mResult) && !empty($UserId))
 		{
-			$oCoreDecorator = \CApi::GetModuleDecorator('Core');
+			$oCoreDecorator = \Aurora\System\Api::GetModuleDecorator('Core');
 			$oCoreDecorator->UpdateUser($UserId, $Name);
 		}
 		
