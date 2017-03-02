@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2016, Afterlogic Corp.
+ * @copyright Copyright (c) 2017, Afterlogic Corp.
  * @license AGPL-3.0
  *
  * This code is free software: you can redistribute it and/or modify
@@ -48,7 +48,7 @@ class StandardRegisterFormWebclientModule extends \Aurora\System\AbstractModule
 	 * @param string $Password Password for authentication.
 	 * @param int $UserId Identifier of user which will contain new account.
 	 * @return array
-	 * @throws \System\Exceptions\AuroraApiException
+	 * @throws \System\Exceptions\ApiException
 	 */
 	public function Register($Login, $Password, $UserId)
 	{
@@ -65,7 +65,7 @@ class StandardRegisterFormWebclientModule extends \Aurora\System\AbstractModule
 
 		if (empty($UserId))
 		{
-			throw new \System\Exceptions\AuroraApiException(\System\Notifications::InvalidInputParameter);
+			throw new \System\Exceptions\ApiException(\System\Notifications::InvalidInputParameter);
 		}
 		
 		$mResult = false;
