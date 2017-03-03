@@ -20,7 +20,7 @@
 
 namespace Aurora\Modules;
 
-class StandardRegisterFormWebclientModule extends \Aurora\System\AbstractModule
+class StandardRegisterFormWebclientModule extends \Aurora\System\Module\AbstractModule
 {
 	/***** public functions might be called with web API *****/
 	/**
@@ -48,7 +48,7 @@ class StandardRegisterFormWebclientModule extends \Aurora\System\AbstractModule
 	 * @param string $Password Password for authentication.
 	 * @param int $UserId Identifier of user which will contain new account.
 	 * @return array
-	 * @throws \System\Exceptions\ApiException
+	 * @throws \Aurora\System\Exceptions\ApiException
 	 */
 	public function Register($Login, $Password, $UserId)
 	{
@@ -65,7 +65,7 @@ class StandardRegisterFormWebclientModule extends \Aurora\System\AbstractModule
 
 		if (empty($UserId))
 		{
-			throw new \System\Exceptions\ApiException(\System\Notifications::InvalidInputParameter);
+			throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Notifications::InvalidInputParameter);
 		}
 		
 		$mResult = false;
