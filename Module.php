@@ -56,11 +56,11 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 		
 		if (empty($UserId))
 		{
-			\Aurora\System\Api::$__SKIP_CHECK_USER_ROLE__ = true;
-	
+			\Aurora\System\Api::skipCheckUserRole(true);
+
 			$UserId = \Aurora\System\Api::GetModuleDecorator('Core')->CreateUser(0, $Login);
 			
-			\Aurora\System\Api::$__SKIP_CHECK_USER_ROLE__ = false;
+			\Aurora\System\Api::skipCheckUserRole(false);
 		}
 
 		if (empty($UserId))
