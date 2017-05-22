@@ -23,7 +23,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 	 */
 	public function GetSettings()
 	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 		
 		return array(
 			'ServerModuleName' => $this->getConfig('ServerModuleName', ''),
@@ -45,7 +45,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 	 */
 	public function Register($Login, $Password, $UserId)
 	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\EUserRole::Anonymous);
+		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 		
 		if (empty($UserId))
 		{
