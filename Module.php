@@ -51,7 +51,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 		{
 			\Aurora\System\Api::skipCheckUserRole(true);
 
-			$UserId = \Aurora\System\Api::GetModuleDecorator('Core')->CreateUser(0, $Login);
+			$UserId = \Aurora\Modules\Core\Module::Decorator()->CreateUser(0, $Login);
 			
 			\Aurora\System\Api::skipCheckUserRole(false);
 		}
@@ -76,14 +76,14 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 		
 		if (!empty($mResult))
 		{
-			$oLoginDecorator = \Aurora\System\Api::GetModuleDecorator('StandardLoginFormWebclient');
+			$oLoginDecorator = \Aurora\Modules\StandardLoginFormWebclient\Module::Decorator();
 			$mResult = $oLoginDecorator->Login($Login, $Password);
 			\Aurora\System\Api::getAuthenticatedUserId($mResult['AuthToken']);
 		}
 		
 		if (!empty($Name) && !empty($mResult) && !empty($UserId))
 		{
-			$oCoreDecorator = \Aurora\System\Api::GetModuleDecorator('Core');
+			$oCoreDecorator = \Aurora\Modules\Core\Module::Decorator();
 			$oCoreDecorator->UpdateUser($UserId, $Name);
 		}
 		
