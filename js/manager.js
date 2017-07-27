@@ -17,18 +17,36 @@ module.exports = function (oAppData) {
 	
 	if (!App.isPublic() && bAnonimUser)
 	{
-		return {
-			/**
-			 * Returns login view screen.
-			 */
-			getScreens: function () {
-				var oScreens = {};
-				oScreens[Settings.HashModuleName] = function () {
+		if (App.isMobile())
+		{
+			return {
+				/**
+				 * Returns register view screen as is.
+				 */
+				getRegisterScreenView: function () {
 					return require('modules/%ModuleName%/js/views/RegisterView.js');
-				};
-				return oScreens;
-			}
-		};
+				},
+				
+				getHashModuleName: function () {
+					return Settings.HashModuleName;
+				}
+			};
+		}
+		else
+		{
+			return {
+				/**
+				 * Returns login view screen.
+				 */
+				getScreens: function () {
+					var oScreens = {};
+					oScreens[Settings.HashModuleName] = function () {
+						return require('modules/%ModuleName%/js/views/RegisterView.js');
+					};
+					return oScreens;
+				}
+			};
+		}
 	}
 	
 	return null;
