@@ -1,6 +1,8 @@
 'use strict';
 
 var
+	_ = require('underscore'),
+	
 	Types = require('%PathToCoreWebclientModule%/js/utils/Types.js')
 ;
 
@@ -12,18 +14,21 @@ module.exports = {
 	InfoText: '',
 	
 	/**
-	 * Initializes settings from AppData section.
+	 * Initializes settings from AppData object sections.
 	 * 
-	 * @param {Object} oAppDataSection contains module settings from server.
+	 * @param {Object} oAppData Object contained modules settings.
 	 */
-	init: function (oAppDataSection) {
-		if (oAppDataSection)
+	init: function (oAppData)
+	{
+		var oAppDataSection = oAppData['%ModuleName%'];
+		
+		if (!_.isEmpty(oAppDataSection))
 		{
-			this.ServerModuleName = Types.pString(oAppDataSection.ServerModuleName);
-			this.HashModuleName = Types.pString(oAppDataSection.HashModuleName);
+			this.ServerModuleName = Types.pString(oAppDataSection.ServerModuleName, this.ServerModuleName);
+			this.HashModuleName = Types.pString(oAppDataSection.HashModuleName, this.HashModuleName);
 			
-			this.CustomLogoUrl = Types.pString(oAppDataSection.CustomLogoUrl);
-			this.InfoText = Types.pString(oAppDataSection.InfoText);
+			this.CustomLogoUrl = Types.pString(oAppDataSection.CustomLogoUrl, this.CustomLogoUrl);
+			this.InfoText = Types.pString(oAppDataSection.InfoText, this.InfoText);
 		}
 	}
 };
