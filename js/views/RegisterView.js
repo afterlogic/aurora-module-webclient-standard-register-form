@@ -31,6 +31,7 @@ function CRegisterView()
 	
 	this.sCustomLogoUrl = Settings.CustomLogoUrl;
 	this.sInfoText = Settings.InfoText;
+	this.sBottomInfoHtmlText = Settings.BottomInfoHtmlText;
 	
 	this.login = ko.observable('');
 	this.enableLoginEdit = ko.observable(true);

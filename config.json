@@ -18,5 +18,9 @@
     "InfoText": [
 		"",
 		"string"
+	],
+    "BottomInfoHtmlText": [
+		"",
+		"string"
 	]
 }

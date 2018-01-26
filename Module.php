@@ -30,6 +30,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 			'HashModuleName' => $this->getConfig('HashModuleName', ''),
 			'CustomLogoUrl' => $this->getConfig('CustomLogoUrl', ''),
 			'InfoText' => $this->getConfig('InfoText', ''),
+			'BottomInfoHtmlText' => $this->getConfig('BottomInfoHtmlText', ''),
 		);
 	}
 	

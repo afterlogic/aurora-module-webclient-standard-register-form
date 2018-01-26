@@ -12,6 +12,7 @@ module.exports = {
 	
 	CustomLogoUrl: '',
 	InfoText: '',
+	BottomInfoHtmlText: '',
 	
 	/**
 	 * Initializes settings from AppData object sections.
@@ -29,6 +30,7 @@ module.exports = {
 			
 			this.CustomLogoUrl = Types.pString(oAppDataSection.CustomLogoUrl, this.CustomLogoUrl);
 			this.InfoText = Types.pString(oAppDataSection.InfoText, this.InfoText);
+			this.BottomInfoHtmlText = Types.pString(oAppDataSection.BottomInfoHtmlText, this.BottomInfoHtmlText);
 		}
 	}
 };
