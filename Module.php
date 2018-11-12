@@ -27,8 +27,8 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 		
 		return array(
-			'ServerModuleName' => $this->getConfig('ServerModuleName', ''),
-			'HashModuleName' => $this->getConfig('HashModuleName', ''),
+			'ServerModuleName' => $this->getConfig('ServerModuleName', 'StandardRegisterFormWebclient'),
+			'HashModuleName' => $this->getConfig('HashModuleName', 'login'),
 			'CustomLogoUrl' => $this->getConfig('CustomLogoUrl', ''),
 			'InfoText' => $this->getConfig('InfoText', ''),
 			'BottomInfoHtmlText' => $this->getConfig('BottomInfoHtmlText', ''),
