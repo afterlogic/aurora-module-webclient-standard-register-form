@@ -48,7 +48,7 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 	public function Register($Login, $Password, $UserId)
 	{
 		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
-		
+
 		if (empty($UserId))
 		{
 			$bPrevState = \Aurora\System\Api::skipCheckUserRole(true);
@@ -62,9 +62,9 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 		{
 			throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Notifications::InvalidInputParameter);
 		}
-		
+
 		$mResult = false;
-		
+
 		$refArgs = array (
 			'Login' => $Login,
 			'Password' => $Password,
@@ -75,20 +75,14 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 			$refArgs,
 			$mResult
 		);
-		
+
 		if (!empty($mResult))
 		{
 			$oLoginDecorator = \Aurora\Modules\StandardLoginFormWebclient\Module::Decorator();
 			$mResult = $oLoginDecorator->Login($Login, $Password);
 			\Aurora\System\Api::getAuthenticatedUserId($mResult['AuthToken']);
 		}
-		
-		if (!empty($Name) && !empty($mResult) && !empty($UserId))
-		{
-			$oCoreDecorator = \Aurora\Modules\Core\Module::Decorator();
-			$oCoreDecorator->UpdateUser($UserId, $Name);
-		}
-		
+
 		return $mResult;
 	}
 	/***** public functions might be called with web API *****/
