@@ -30,14 +30,14 @@
 						<div class="row password" data-bind="css: {'focused': passwordFocus(), 'filled': password().length > 0, shake: shake()}">
 							<label for="selenium_register_password" class="placeholder"></label>
 							<span class="value">
-								<input id="selenium_register_password" tabindex="2" class="input" name="password" type="password" spellcheck="false"
+								<input id="selenium_register_password" tabindex="2" class="input" name="password" autocomplete="new-password" type="password" spellcheck="false"
 									   data-bind="value: password, hasfocus: passwordFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_PASSWORD', 'type': 'placeholder'}" />
 							</span>
 						</div>
 						<div class="row password" data-bind="css: {'focused': confirmPasswordFocus(), 'filled': confirmPassword().length > 0, shake: shake()}">
 							<label for="selenium_register_confirm_password" class="placeholder"></label>
 							<span class="value">
-								<input id="selenium_register_confirm_password" tabindex="2" class="input" name="confirmPassword" type="password" spellcheck="false"
+								<input id="selenium_register_confirm_password" tabindex="2" class="input" name="confirmPassword" autocomplete="new-password" type="password" spellcheck="false"
 									   data-bind="value: confirmPassword, hasfocus: confirmPasswordFocus, valueUpdate: 'afterkeydown', i18n: {'key': 'COREWEBCLIENT/LABEL_CONFIRM_PASSWORD', 'type': 'placeholder'}" />
 							</span>
 						</div>
