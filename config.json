@@ -1,26 +1,50 @@
 {
-	"Disabled": [
-		false,
-		"bool"
-	],
-    "ServerModuleName": [
-		"StandardRegisterFormWebclient",
-		"string"
-	],
-    "HashModuleName": [
-		"register",
-		"string"
-	],
-    "CustomLogoUrl": [
-		"",
-		"string"
-	],
-    "InfoText": [
-		"",
-		"string"
-	],
-    "BottomInfoHtmlText": [
-		"",
-		"string"
-	]
+  "Disabled": [
+    false,
+    "bool"
+  ],
+  "Disabled_Description": [
+    "",
+    "string"
+  ],
+  "ServerModuleName": [
+    "StandardRegisterFormWebclient",
+    "string"
+  ],
+  "ServerModuleName_Description": [
+    "",
+    "string"
+  ],
+  "HashModuleName": [
+    "register",
+    "string"
+  ],
+  "HashModuleName_Description": [
+    "",
+    "string"
+  ],
+  "CustomLogoUrl": [
+    "",
+    "string"
+  ],
+  "CustomLogoUrl_Description": [
+    "",
+    "string"
+  ],
+  "InfoText": [
+    "",
+    "string"
+  ],
+  "InfoText_Description": [
+    "",
+    "string"
+  ],
+  "BottomInfoHtmlText": [
+    "",
+    "string"
+  ],
+  "BottomInfoHtmlText_Description": [
+    "",
+    "string"
+  ]
 }
