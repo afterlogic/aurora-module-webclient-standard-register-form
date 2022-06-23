@@ -4,7 +4,7 @@
 		"bool"
 	],
 	"Disabled_Description": [
-		"",
+		"Setting to true disables the module",
 		"string"
 	],
 	"ServerModuleName": [
@@ -12,7 +12,7 @@
 		"string"
 	],
 	"ServerModuleName_Description": [
-		"",
+		"Defines name of the module responsible for registration page",
 		"string"
 	],
 	"HashModuleName": [
@@ -20,7 +20,7 @@
 		"string"
 	],
 	"HashModuleName_Description": [
-		"",
+		"Defines URL hash used by the module",
 		"string"
 	],
 	"CustomLogoUrl": [
@@ -28,7 +28,7 @@
 		"string"
 	],
 	"CustomLogoUrl_Description": [
-		"",
+		"Defines URL of logo image used on registration page",
 		"string"
 	],
 	"InfoText": [
@@ -36,7 +36,7 @@
 		"string"
 	],
 	"InfoText_Description": [
-		"",
+		"Defines additional text message shown on registration page",
 		"string"
 	],
 	"BottomInfoHtmlText": [
@@ -44,7 +44,7 @@
 		"string"
 	],
 	"BottomInfoHtmlText_Description": [
-		"",
+		"Defines bottom text message shown on registration page",
 		"string"
 	]
 }
