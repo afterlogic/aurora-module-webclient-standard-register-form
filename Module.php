@@ -51,6 +51,10 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 	{
 		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 
+		if (\Aurora\System\Api::getAuthenticatedUserId()) {
+			return false;
+		}
+
 		if (empty($UserId))
 		{
 			$bPrevState = \Aurora\System\Api::skipCheckUserRole(true);
