@@ -62,7 +62,10 @@ function CRegisterView()
 		this.login(oParams.UserName);
 		this.enableLoginEdit(false);
 	}, this));
-	
+
+	this.beforeButtonsControllers = ko.observableArray([]);
+	App.broadcastEvent('AnonymousUserForm::PopulateBeforeButtonsControllers', { ModuleName: '%ModuleName%', RegisterBeforeButtonsController: this.registerBeforeButtonsController.bind(this) });
+
 	App.broadcastEvent('%ModuleName%::ConstructView::after', {'Name': this.ViewConstructorName, 'View': this});
 }
 
@@ -125,21 +128,24 @@ CRegisterView.prototype.validateForm = function (sLogin, sPassword, sConfirmPass
  */
 CRegisterView.prototype.register = function ()
 {
-	if (!this.loading())
-	{
-		var
-			sLogin = $.trim(this.login()),
-			sPassword = $.trim(this.password()),
-			sConfirmPassword = $.trim(this.confirmPassword()),
-			oParameters = {
-				'Login': sLogin,
-				'Password': sPassword
-			}
+	if (!this.loading()) {
+		const
+			login = $.trim(this.login()),
+			password = $.trim(this.password()),
+			confirmPassword = $.trim(this.confirmPassword())
 		;
-		if (this.validateForm(sLogin, sPassword, sConfirmPassword))
-		{
+		if (this.validateForm(login, password, confirmPassword)) {
+			const parameters = {
+				'Login': login,
+				'Password': password
+			};
+			const eventParameters = {
+				Module: '%ModuleName%',
+				Parameters: parameters
+			};
+			App.broadcastEvent('AnonymousUserForm::PopulateFormSubmitParameters', eventParameters);
 			this.loading(true);
-			Ajax.send('%ModuleName%', 'Register', oParameters, this.onRegisterResponse, this);
+			Ajax.send('%ModuleName%', 'Register', parameters, this.onRegisterResponse, this);
 		}
 	}
 };
@@ -176,6 +182,15 @@ CRegisterView.prototype.onRegisterResponse = function (oResponse, oRequest)
 			UrlUtils.clearAndReloadLocation(Browser.ie8AndBelow, false);
 		}
 	}
+};
+
+
+/**
+ * @param {Object} oComponent
+ */
+CRegisterView.prototype.registerBeforeButtonsController = function (oComponent)
+{
+	this.beforeButtonsControllers.push(oComponent);
 };
 
 module.exports = new CRegisterView();

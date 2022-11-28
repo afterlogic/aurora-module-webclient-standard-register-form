@@ -86,7 +86,9 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
 		{
 			$oLoginDecorator = \Aurora\Modules\StandardLoginFormWebclient\Module::Decorator();
 			$mResult = $oLoginDecorator->Login($Login, $Password);
-			\Aurora\System\Api::getAuthenticatedUserId($mResult['AuthToken']);
+			if ($mResult && isset($mResult['AuthToken'])) {
+				\Aurora\System\Api::getAuthenticatedUserId($mResult['AuthToken']);
+			}
 		}
 
 		return $mResult;

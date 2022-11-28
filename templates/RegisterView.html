@@ -42,6 +42,9 @@
 							</span>
 						</div>
 					</div>
+					<!-- ko foreach: beforeButtonsControllers -->
+						<!-- ko template: { name: $data.ViewTemplate, data: $data} --><!-- /ko -->
+					<!-- /ko -->
 					<div class="row buttons">
 						<button type="submit" tabindex="3" class="button login" data-bind="text: registerButtonText, command: registerCommand"></button>
 					</div>
