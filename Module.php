@@ -9,7 +9,7 @@ namespace Aurora\Modules\StandardRegisterFormWebclient;
 
 /**
  * Displays standard register form with ability to specify user name, account login and password.
- * 
+ *
  * @license https://www.gnu.org/licenses/agpl-3.0.html AGPL-3.0
  * @license https://afterlogic.com/products/common-licensing Afterlogic Software License
  * @copyright Copyright (c) 2023, Afterlogic Corp.
@@ -18,80 +18,77 @@ namespace Aurora\Modules\StandardRegisterFormWebclient;
  */
 class Module extends \Aurora\System\Module\AbstractWebclientModule
 {
-	/***** public functions might be called with web API *****/
-	/**
-	 * Obtains list of module settings for authenticated user.
-	 * 
-	 * @return array
-	 */
-	public function GetSettings()
-	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
-		
-		return array(
-			'ServerModuleName' => $this->getConfig('ServerModuleName', 'StandardRegisterFormWebclient'),
-			'HashModuleName' => $this->getConfig('HashModuleName', 'login'),
-			'CustomLogoUrl' => $this->getConfig('CustomLogoUrl', ''),
-			'InfoText' => $this->getConfig('InfoText', ''),
-			'BottomInfoHtmlText' => $this->getConfig('BottomInfoHtmlText', ''),
-		);
-	}
-	
-	/**
-	 * Broadcasts Register event to other modules to log in the system with specified parameters.
-	 * 
-	 * @param string $Name New name for user.
-	 * @param string $Login Login for authentication.
-	 * @param string $Password Password for authentication.
-	 * @param int $UserId Identifier of user which will contain new account.
-	 * @return array
-	 * @throws \Aurora\System\Exceptions\ApiException
-	 */
-	public function Register($Login, $Password, $UserId)
-	{
-		\Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
+    /***** public functions might be called with web API *****/
+    /**
+     * Obtains list of module settings for authenticated user.
+     *
+     * @return array
+     */
+    public function GetSettings()
+    {
+        \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 
-		if (\Aurora\System\Api::getAuthenticatedUserId()) {
-			return false;
-		}
+        return array(
+            'ServerModuleName' => $this->getConfig('ServerModuleName', 'StandardRegisterFormWebclient'),
+            'HashModuleName' => $this->getConfig('HashModuleName', 'login'),
+            'CustomLogoUrl' => $this->getConfig('CustomLogoUrl', ''),
+            'InfoText' => $this->getConfig('InfoText', ''),
+            'BottomInfoHtmlText' => $this->getConfig('BottomInfoHtmlText', ''),
+        );
+    }
 
-		if (empty($UserId))
-		{
-			$bPrevState = \Aurora\System\Api::skipCheckUserRole(true);
+    /**
+     * Broadcasts Register event to other modules to log in the system with specified parameters.
+     *
+     * @param string $Name New name for user.
+     * @param string $Login Login for authentication.
+     * @param string $Password Password for authentication.
+     * @param int $UserId Identifier of user which will contain new account.
+     * @return array
+     * @throws \Aurora\System\Exceptions\ApiException
+     */
+    public function Register($Login, $Password, $UserId)
+    {
+        \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 
-			$UserId = \Aurora\Modules\Core\Module::Decorator()->CreateUser(0, $Login);
-			
-			\Aurora\System\Api::skipCheckUserRole($bPrevState);
-		}
+        if (\Aurora\System\Api::getAuthenticatedUserId()) {
+            return false;
+        }
 
-		if (empty($UserId))
-		{
-			throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Notifications::InvalidInputParameter);
-		}
+        if (empty($UserId)) {
+            $bPrevState = \Aurora\System\Api::skipCheckUserRole(true);
 
-		$mResult = false;
+            $UserId = \Aurora\Modules\Core\Module::Decorator()->CreateUser(0, $Login);
 
-		$refArgs = array (
-			'Login' => $Login,
-			'Password' => $Password,
-			'UserId' => $UserId,
-		);
-		$this->broadcastEvent(
-			'Register', 
-			$refArgs,
-			$mResult
-		);
+            \Aurora\System\Api::skipCheckUserRole($bPrevState);
+        }
 
-		if (!empty($mResult))
-		{
-			$oLoginDecorator = \Aurora\Modules\StandardLoginFormWebclient\Module::Decorator();
-			$mResult = $oLoginDecorator->Login($Login, $Password);
-			if ($mResult && isset($mResult['AuthToken'])) {
-				\Aurora\System\Api::getAuthenticatedUserId($mResult['AuthToken']);
-			}
-		}
+        if (empty($UserId)) {
+            throw new \Aurora\System\Exceptions\ApiException(\Aurora\System\Notifications::InvalidInputParameter);
+        }
 
-		return $mResult;
-	}
-	/***** public functions might be called with web API *****/
+        $mResult = false;
+
+        $refArgs = array(
+            'Login' => $Login,
+            'Password' => $Password,
+            'UserId' => $UserId,
+        );
+        $this->broadcastEvent(
+            'Register',
+            $refArgs,
+            $mResult
+        );
+
+        if (!empty($mResult)) {
+            $oLoginDecorator = \Aurora\Modules\StandardLoginFormWebclient\Module::Decorator();
+            $mResult = $oLoginDecorator->Login($Login, $Password);
+            if ($mResult && isset($mResult['AuthToken'])) {
+                \Aurora\System\Api::getAuthenticatedUserId($mResult['AuthToken']);
+            }
+        }
+
+        return $mResult;
+    }
+    /***** public functions might be called with web API *****/
 }
