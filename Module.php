@@ -40,7 +40,6 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
     /**
      * Broadcasts Register event to other modules to log in the system with specified parameters.
      *
-     * @param string $Name New name for user.
      * @param string $Login Login for authentication.
      * @param string $Password Password for authentication.
      * @param int $UserId Identifier of user which will contain new account.
