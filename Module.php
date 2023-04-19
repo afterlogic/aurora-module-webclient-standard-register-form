@@ -14,6 +14,8 @@ namespace Aurora\Modules\StandardRegisterFormWebclient;
  * @license https://afterlogic.com/products/common-licensing Afterlogic Software License
  * @copyright Copyright (c) 2023, Afterlogic Corp.
  *
+ * @property Settings $oModuleSettings
+ *
  * @package Modules
  */
 class Module extends \Aurora\System\Module\AbstractWebclientModule
@@ -48,11 +50,11 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
         \Aurora\System\Api::checkUserRoleIsAtLeast(\Aurora\System\Enums\UserRole::Anonymous);
 
         return array(
-            'ServerModuleName' => $this->getConfig('ServerModuleName', 'StandardRegisterFormWebclient'),
-            'HashModuleName' => $this->getConfig('HashModuleName', 'login'),
-            'CustomLogoUrl' => $this->getConfig('CustomLogoUrl', ''),
-            'InfoText' => $this->getConfig('InfoText', ''),
-            'BottomInfoHtmlText' => $this->getConfig('BottomInfoHtmlText', ''),
+            'ServerModuleName' => $this->oModuleSettings->ServerModuleName,
+            'HashModuleName' => $this->oModuleSettings->HashModuleName,
+            'CustomLogoUrl' => $this->oModuleSettings->CustomLogoUrl,
+            'InfoText' => $this->oModuleSettings->InfoText,
+            'BottomInfoHtmlText' => $this->oModuleSettings->BottomInfoHtmlText,
         );
     }
 
