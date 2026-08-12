@@ -84,9 +84,11 @@ class Module extends \Aurora\System\Module\AbstractWebclientModule
         if (empty($UserId)) {
             $bPrevState = \Aurora\System\Api::skipCheckUserRole(true);
 
-            $UserId = \Aurora\Modules\Core\Module::Decorator()->CreateUser(0, $Login);
-
-            \Aurora\System\Api::skipCheckUserRole($bPrevState);
+            try {
+                $UserId = \Aurora\Modules\Core\Module::Decorator()->CreateUser(0, $Login);
+            } finally {
+                \Aurora\System\Api::skipCheckUserRole($bPrevState);
+            }
         }
 
         if (empty($UserId)) {
