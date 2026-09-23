@@ -144,6 +144,14 @@ CRegisterView.prototype.register = function ()
 				Parameters: parameters
 			};
 			App.broadcastEvent('AnonymousUserForm::PopulateFormSubmitParameters', eventParameters);
+
+			if (eventParameters.Reject) {
+				// A subscriber (e.g. a captcha plugin) couldn't provide required parameters -
+				// don't send a request that the server would reject anyway.
+				this.shake(true);
+				return;
+			}
+
 			this.loading(true);
 			Ajax.send('%ModuleName%', 'Register', parameters, this.onRegisterResponse, this);
 		}
